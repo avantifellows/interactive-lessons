@@ -1,14 +1,14 @@
 <script setup lang="ts">
 // https://github.com/vueuse/head
 useHead({
-  title: "Interactive Lessons",
+  title: 'Interactive Lessons',
   meta: [
     {
-      name: "description",
-      content: "Interactive 3d lessons spanning across STEM subjects",
+      name: 'description',
+      content: 'Interactive 3d lessons spanning across STEM subjects',
     },
   ],
-});
+})
 </script>
 
 <template>

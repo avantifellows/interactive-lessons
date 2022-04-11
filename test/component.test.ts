@@ -1,5 +1,6 @@
-import { mount } from '@vue/test-utils'
-import { describe, expect, it } from 'vitest'
+// import { mount } from '@vue/test-utils'
+// import { expect } from 'vitest'
+import { describe, it } from 'vitest'
 // import Counter from '../src/components/Counter.vue'
 
 describe('Counter.vue', () => {

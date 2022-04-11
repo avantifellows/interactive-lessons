@@ -1,50 +1,54 @@
-import * as THREE from "three";
-import EventEmitter from "./EventEmitter";
-import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import * as THREE from 'three'
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import EventEmitter from './EventEmitter'
 
 export default class Resources extends EventEmitter {
   constructor(sources) {
-    super();
+    super()
 
-    this.sources = sources;
+    this.sources = sources
 
-    this.items = [];
-    this.toLoad = this.sources.length;
-    this.loaded = 0;
+    this.items = []
+    this.toLoad = this.sources.length
+    this.loaded = 0
 
-    this.setLoaders();
-    this.startLoading();
+    this.setLoaders()
+    this.startLoading()
   }
 
   setLoaders() {
-    this.loaders = {};
+    this.loaders = {}
 
     // draco loader
-    this.loaders.dracoLoader = new DRACOLoader();
-    this.loaders.dracoLoader.setDecoderPath("/draco/");
+    this.loaders.dracoLoader = new DRACOLoader()
+    this.loaders.dracoLoader.setDecoderPath('/draco/')
 
     // gltf loader
-    this.loaders.gltfLoader = new GLTFLoader();
-    this.loaders.gltfLoader.setDRACOLoader(this.loaders.dracoLoader);
+    this.loaders.gltfLoader = new GLTFLoader()
+    this.loaders.gltfLoader.setDRACOLoader(this.loaders.dracoLoader)
 
     // texture loader
-    this.loaders.textureLoader = new THREE.TextureLoader();
+    this.loaders.textureLoader = new THREE.TextureLoader()
   }
 
   startLoading() {
     for (const source of this.sources) {
-      if (source.type == "GLTFModel") {
+      if (source.type === 'GLTFModel') {
         this.loaders.gltfLoader.load(
           source.path,
-          (file) => this.sourceLoaded(source, file),
+          file => this.sourceLoaded(source, file),
           () => {},
-          (error) => console.log("error while loading source - ", source, error)
-        );
-      } else if (source.type == "texture") {
-        this.loaders.textureLoader.load(source.path, (file) =>
-          this.sourceLoaded(source, file)
-        );
+          (error) => {
+            /* eslint-disable-next-line no-console */
+            console.log('error while loading source - ', source, error)
+          },
+        )
+      }
+      else if (source.type === 'texture') {
+        this.loaders.textureLoader.load(source.path, file =>
+          this.sourceLoaded(source, file),
+        )
       }
     }
   }
@@ -52,9 +56,10 @@ export default class Resources extends EventEmitter {
   sourceLoaded(source, file) {
     this.items[source.name] = {
       type: source.type,
-      file: file,
-    };
-    this.loaded++;
-    if (this.loaded == this.toLoad) this.trigger("ready");
+      file,
+    }
+    this.loaded++
+    if (this.loaded === this.toLoad)
+      this.trigger('ready')
   }
 }
