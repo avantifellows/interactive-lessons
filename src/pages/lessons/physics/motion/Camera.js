@@ -1,4 +1,6 @@
 import * as THREE from 'three'
+// NOTE -- make sure to import THREE modules as a `.js` file extension
+// reason -- https://stackoverflow.com/questions/65384754/error-err-module-not-found-cannot-find-module
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import Application from './Application'
 
