@@ -8,6 +8,7 @@ onMounted(() => {
   const app = new Application({
     canvas: document.getElementById(canvasName),
   })
+  window.app = app
 })
 </script>
 
