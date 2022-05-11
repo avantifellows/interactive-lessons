@@ -1,8 +1,8 @@
 // import * as THREE from 'three'
 import Application from '../Application'
-import DummyCube from '../Utils/DummyCube'
-// import Grid from "@/Application/World/Objects/Grid";
-// import Axes from "../Utils/Axes";
+import Axes from '../Utils/Axes'
+import Car from './Objects/Car'
+import LandMass from './Objects/LandMass'
 
 export default class World {
   constructor() {
@@ -10,8 +10,9 @@ export default class World {
     this.scene = this.application.scene
     this.resources = this.application.resources
     this.time = this.application.time
-    // this.axes = new Axes(10)
-    //  this.grid = new Grid(1000, 500, this.gravityObjects);
-    this.dummyCube = new DummyCube()
+    if (this.application.debug.active)
+      this.axes = new Axes(10)
+    this.car = new Car()
+    this.landMass = new LandMass()
   }
 }

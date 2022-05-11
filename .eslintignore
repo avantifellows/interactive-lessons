@@ -1,2 +1,4 @@
 dist
 public
+**/perlin3d.js
+**/perlin4d.js
